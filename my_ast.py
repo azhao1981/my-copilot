@@ -96,4 +96,12 @@ def current_path(path: str) -> str:
 
 
 if __name__ == "__main__":
-    process_prompt('./prompt-base.md', "1.8 和 1.11 谁大")
+    role = """
+    You play as a software architect, AI expert, and telecommunications expert to answer questions for me.
+    """
+    question = """
+    使用golang从英文句子中提取出所有的地名，区分国家城市和省份，会使用到哪些库和NLP技术
+    从哪里可以得到相关数据或是字典
+    请给出代码示例
+    """
+    process_prompt('./prompt-base.md', role + question)
