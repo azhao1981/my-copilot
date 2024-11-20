@@ -1,0 +1,12 @@
+[flake8]
+ignore = E203, E266, E501, W503, F403, F401, C901
+max-line-length = 127
+max-complexity = 10
+select = B,C,E,F,W,T4,B9
+# E203: 空白符与冒号前不适当。
+# E266: 多个井号注释。
+# E501: 行长度超过限制。
+# W503: 运算符前的换行符。
+# F403: from module import * 的引入未使用。
+# F401: 导入未被使用。
+# C901: 代码循环复杂度。
