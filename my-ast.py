@@ -21,7 +21,11 @@ class Config:
         self.base_url = os.getenv("ONEAPI_BASE_URL", "")
 
     def get_llm_config(self, model_name: str) -> LLMConfig:
-        return LLMConfig(api_key=self.api_key, base_url=self.base_url, model_name=model_name)
+        return LLMConfig(
+            api_key=self.api_key,
+            base_url=self.base_url,
+            model_name=model_name
+        )
 
 
 class LLMFactory:
@@ -73,7 +77,8 @@ def process_prompt(
     llm_config = config.get_llm_config(model_name)
     llm = LLMFactory.create(llm_config)
 
-    prompt = PromptHandler.load_prompt(current_path(prompt_file), additional_text)
+    prompt = PromptHandler.load_prompt(
+        current_path(prompt_file), additional_text)
     response = llm.stream(prompt) if stream else llm(prompt)
 
     file_path = FileManager.get_session_path()
