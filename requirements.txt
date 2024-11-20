@@ -1,0 +1,12 @@
+--index-url https://pypi.tuna.tsinghua.edu.cn/simple
+python-dotenv>=1.0.1
+poetry
+ipykernel
+jupyter
+ipywidgets
+openai
+langchain_openai
+langchain
+dynaconf
+pytest
+python-dotenv

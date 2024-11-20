@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-python.autopep8",
+        "ms-python.flake8",
+        "mhutchie.git-graph",
+        "njpwerner.autodocstring",
+        "steoates.autoimport",
+        "christian-kohler.path-intellisense"
+    ]
+}
