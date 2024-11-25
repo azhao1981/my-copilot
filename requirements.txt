@@ -7,6 +7,7 @@ ipywidgets
 openai
 langchain_openai
 langchain
+langchain-community
 dynaconf
 pytest
 python-dotenv
