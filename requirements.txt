@@ -12,3 +12,4 @@ dynaconf
 pytest
 python-dotenv
 autopep8
+pip
