@@ -2,7 +2,7 @@
 .envrc
 /sessions/temp-*
 .vscode/*.json
-
+task/temp*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
