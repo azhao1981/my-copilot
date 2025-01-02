@@ -13,3 +13,4 @@ pytest
 python-dotenv
 autopep8
 pip
+jsonpath_ng

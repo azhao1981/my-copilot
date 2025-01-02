@@ -5,3 +5,9 @@
 ```bash
 ./build.sh
 ```
+
+## TODOLIST
+
++ [ ] vector search
++ [ ] search engine
++ [ ] curl
