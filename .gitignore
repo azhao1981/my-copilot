@@ -1,8 +1,11 @@
 # project
 .envrc
 /sessions/temp-*
+/sessions/.code
 .vscode/*.json
 task/temp*
+prompts/.*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

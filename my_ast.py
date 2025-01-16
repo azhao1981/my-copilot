@@ -11,20 +11,28 @@ from typing import Iterator, Union
 class LLMConfig(BaseModel):
     api_key: str
     base_url: str
-    model_name: str
+    model: str
+
+
+def os_getenvs(default: str, *keys: str) -> dict:
+    for key in keys:
+        value = os.getenv(key, "")
+        if value:
+            return value
+    return default
 
 
 class Config:
-    def __init__(self):
+    def __init__(self, api_key: str, base_url: str):
         load_dotenv(find_dotenv(), override=True)
-        self.api_key = os.getenv("ONEAPI_API_KEY", "")
-        self.base_url = os.getenv("ONEAPI_BASE_URL", "")
+        self.api_key = api_key or os_getenvs(api_key, "API_KEY", "ONEAPI_API_KEY")
+        self.base_url = base_url or os_getenvs(base_url, "BASE_URL", "ONEAPI_BASE_URL")
 
-    def get_llm_config(self, model_name: str) -> LLMConfig:
+    def get_llm_config(self, model: str) -> LLMConfig:
         return LLMConfig(
             api_key=self.api_key,
             base_url=self.base_url,
-            model_name=model_name
+            model=model
         )
 
 
@@ -34,7 +42,7 @@ class LLMFactory:
         return ChatOpenAI(
             api_key=config.api_key,
             base_url=config.base_url,
-            model=config.model_name
+            model=config.model
         )
 
 
@@ -70,11 +78,13 @@ class ResponseHandler:
 
 def process_prompt(
         prompt_file: str, additional_text: str,
-        model_name: str = "claude-3-5-sonnet",
-        stream: bool = True
+        model: str = "claude-3-5-sonnet",
+        stream: bool = True,
+        api_key: str = "",
+        base_url: str = ""
 ):
-    config = Config()
-    llm_config = config.get_llm_config(model_name)
+    config = Config(api_key, base_url)
+    llm_config = config.get_llm_config(model)
     llm = LLMFactory.create(llm_config)
 
     prompt = PromptHandler.load_prompt(
