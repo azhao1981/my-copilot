@@ -68,15 +68,17 @@ class ResponseHandler:
     def __init__(self, file_path: Path):
         self.file_path = file_path
 
-    def process_response(self, response: Union[str, Iterator], stream: bool = True):
+    def process_response(self, response: Union[str, Iterator], stream: bool = True, show=True):
         with open(self.file_path, 'w', encoding='utf-8') as file:
             if stream:
                 for chunk in response:
                     content = chunk.content
-                    print(content, end="")
+                    if show:
+                        print(content, end="")
                     file.write(content)
             else:
-                print(response.content)
+                if show:
+                    print(response.content)
                 file.write(response.content)
 
 
@@ -85,7 +87,8 @@ def process_prompt(
         model: str = "claude-3-5-sonnet",
         stream: bool = True,
         api_key: str = "",
-        base_url: str = ""
+        base_url: str = "",
+        show: bool = True
 ):
     config = Config(api_key, base_url)
     llm_config = config.get_llm_config(model)
@@ -96,7 +99,7 @@ def process_prompt(
     response = llm.stream(prompt) if stream else llm(prompt)
 
     file_path = FileManager.get_session_path()
-    ResponseHandler(file_path).process_response(response, stream)
+    ResponseHandler(file_path).process_response(response, stream, show=show)
 
 
 def current_path(path: str) -> str:
