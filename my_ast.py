@@ -8,6 +8,10 @@ import datetime
 from typing import Iterator, Union
 
 
+def load_env():
+    load_dotenv(find_dotenv(), override=True)
+
+
 class LLMConfig(BaseModel):
     api_key: str
     base_url: str
@@ -72,8 +76,8 @@ class ResponseHandler:
                     print(content, end="")
                     file.write(content)
             else:
-                print(response)
-                file.write(response)
+                print(response.content)
+                file.write(response.content)
 
 
 def process_prompt(
